@@ -53,7 +53,7 @@
         id="video"
         class="position-absolute top-50 start-50 translate-middle"
       >
-        <source src="{{ URL::asset("/mov/Atoms.mp4") }}" type="video/mp4" />
+        <source src="{{ URL::asset('/mov/Atoms.mp4') }}" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>
@@ -64,7 +64,7 @@
       launch.addEventListener("click", launchExplosion);
 
       function redirectToMainPage(){
-          window.location = '/welcome';
+          window.location = '/home';
       }
 
       function launchExplosion(){

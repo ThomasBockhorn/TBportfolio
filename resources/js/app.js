@@ -1,7 +1,12 @@
 import { createApp } from 'vue';
-import ExampleComponent from '../js/components/ExampleComponent.vue';
-import VueRouter from 'vue-router';
+import App from './App.vue';
+import VueRouter from './router/router';
+import { store } from '../js/store/store.js';
 
-createApp(ExampleComponent).use(VueRouter).mount("#app");
+const app = createApp(App);
+app.use(VueRouter);
+app.use(store);
+
+app.mount('#app');
 
 require('./bootstrap');
