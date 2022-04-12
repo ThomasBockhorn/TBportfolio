@@ -17,6 +17,7 @@
          <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/791afc6e4d.js" crossorigin="anonymous"></script>
     </head>
     <body class="antialiased">
         <div id="app">
