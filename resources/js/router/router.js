@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import createPersistedState from "vuex-persistedstate";
 
 /**
  * Pages for the router
@@ -16,6 +17,7 @@ const routes = [
 ];
 
 const router = createRouter({
+    plugins: [createPersistedState()],
     history: createWebHistory(),
     routes,
 });
