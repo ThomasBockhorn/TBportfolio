@@ -4,13 +4,14 @@
       <div class="col text-center">
         <h3>Contact Form</h3>
       </div>
-      <form class="row g-3">
+      <form ref="form" class="row g-3" @submit.prevent="sendEmail">
         <div class="col-md-6">
           <label for="firstName" class="form-label">Name</label>
           <input
             type="text"
             class="form-control"
             id="firstName"
+            name="from_name"
             placeholder="Theodore Roosevelt"
             v-model="name"
           />
@@ -21,7 +22,9 @@
             type="email"
             class="form-control"
             id="email"
+            name="reply_to"
             placeholder="Theodore.Roosevelt@Bully.com"
+            v-model="email"
           />
         </div>
         <div class="col-md-12">
@@ -32,6 +35,8 @@
               placeholder="Leave a comment here"
               id="message"
               style="height: 150px"
+              name="message"
+              v-model="message"
             ></textarea>
             <label for="message">Enter your message here</label>
           </div>
@@ -41,7 +46,6 @@
             type="submit"
             class="btn btn-outline-light"
             value="Send"
-            @click="sendEmail"
           />
         </div>
       </form>
@@ -50,7 +54,7 @@
 </template>
 
 <script>
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 
 /**
  * Contact allows the visitor in conjunction with emailjs.com to send email notifications to my email account.
@@ -70,18 +74,19 @@ export default {
         emailjs.sendForm(
           "tecktonetMailService",
           "template_sx0lr8w",
-          e.target,
-          "tecktonetMail",
-          {
-            name: this.name,
-            email: this.email,
-            message: this.message,
-          }
-        );
+          this.$refs.form,
+          "user_6QEusrvbUjGdKTzVBP8Xv",
+          ).then((result) => {
+            console.log('Success!', result.text);
+          }).catch((error) => {
+            console.log('Failed...', error.text);
+          })
       } catch (error) {
         console.log({ error });
       }
-      (this.name = ""), (this.email = ""), (this.message = "");
+      this.name = "";
+      this.email = ""; 
+      this.message = "";
     },
   },
 };
