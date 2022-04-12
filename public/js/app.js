@@ -23276,6 +23276,7 @@ __webpack_require__.r(__webpack_exports__);
       this.name = "";
       this.email = "";
       this.message = "";
+      this.$router.push("/home");
     }
   }
 });

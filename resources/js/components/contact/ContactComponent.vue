@@ -87,6 +87,7 @@ export default {
       this.name = "";
       this.email = ""; 
       this.message = "";
+      this.$router.push("/home");
     },
   },
 };
