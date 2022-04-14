@@ -19,9 +19,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('/home', function() {
-//    return view('home');
-//});
 Route::get('/{any}', function () {
     return view('home');
 })->where('any', '.*');
