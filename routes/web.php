@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/{any}', function () {
     return view('home');
