@@ -16,6 +16,7 @@ const actions = {
                 name: userInput.name,
                 email: userInput.email,
                 password: userInput.password,
+                verifyPassword: userInput.verifyPassword
             })
             .then((response) => {
                 commit('SET_TOKEN', response.data.data.token);

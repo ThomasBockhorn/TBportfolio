@@ -23629,7 +23629,8 @@ __webpack_require__.r(__webpack_exports__);
       var userInput = {
         name: this.name,
         email: this.email,
-        password: this.password
+        password: this.password,
+        verifyPassword: this.verifyPassword
       };
       this.$store.dispatch("submitRegistration", userInput);
       this.$emit("backToLogin");
@@ -25913,7 +25914,8 @@ var actions = {
               return axios__WEBPACK_IMPORTED_MODULE_1___default().post("http://127.0.0.1:8000/api/register", {
                 name: userInput.name,
                 email: userInput.email,
-                password: userInput.password
+                password: userInput.password,
+                verifyPassword: userInput.verifyPassword
               }).then(function (response) {
                 commit('SET_TOKEN', response.data.data.token);
               })["catch"](function (error) {
