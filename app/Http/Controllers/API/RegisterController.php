@@ -22,7 +22,6 @@ class RegisterController extends BaseController
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
-            'verifyPassword' => 'required'
         ]);
    
         if($validator->fails()){
@@ -31,7 +30,6 @@ class RegisterController extends BaseController
    
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-        $input['verifyPassword'] = bcrypt($input['verifyPassword']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->plainTextToken;
         $success['name'] =  $user->name;
