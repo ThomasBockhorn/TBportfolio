@@ -23420,18 +23420,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   email: _this.email,
                   password: _this.password
                 };
-                console.log(_this.$store.getters.successful);
-                _context.next = 5;
+                _context.next = 4;
                 return _this.$store.dispatch("login", userInfo);
 
-              case 5:
+              case 4:
                 if (_this.$store.getters.successful) {
                   _this.$emit("successful");
                 } else {
                   alert('Wrong info!');
                 }
 
-              case 6:
+              case 5:
               case "end":
                 return _context.stop();
             }
