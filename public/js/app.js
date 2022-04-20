@@ -23425,6 +23425,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
                 if (_this.$store.getters.successful) {
+                  _this.email = "";
+                  _this.password = "";
+
                   _this.$emit("successful");
                 } else {
                   alert('Wrong info!');

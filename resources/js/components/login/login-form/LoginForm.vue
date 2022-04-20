@@ -57,9 +57,11 @@ export default {
         email: this.email,
         password: this.password
       };
-
+ 
      await this.$store.dispatch("login", userInfo);
       if(this.$store.getters.successful){
+        this.email = "";
+        this.password = "";
         this.$emit("successful");
       } else {
         alert('Wrong info!');
