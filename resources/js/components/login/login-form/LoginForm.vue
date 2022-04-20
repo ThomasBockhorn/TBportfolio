@@ -57,9 +57,9 @@ export default {
         email: this.email,
         password: this.password
       };
+            console.log(this.$store.getters.successful);
 
-      await this.$store.dispatch("login", userInfo);
-
+     await this.$store.dispatch("login", userInfo);
       if(this.$store.getters.successful){
         this.$emit("successful");
       } else {

@@ -7,7 +7,7 @@ const actions = {
     /**
      * submitRegistration will submit info to the server
      *
-     * @param {event} e 
+     * @param {event} userInput 
      * @return void
      */
     async submitRegistration({ commit }, userInput) {
