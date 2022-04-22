@@ -2,6 +2,7 @@ import { createStore } from 'vuex';
 import portfolio from './module/portfolio/index';
 import usersRegistration from './module/usersRegistration/index';
 import userLogin from './module/userLogin/index';
+import authOperations from './module/authOperations/index';
 
 import createPersistedState from 'vuex-persistedstate';
 
@@ -16,6 +17,7 @@ export const store = createStore({
     modules: {
         portfolio,
         usersRegistration,
-        userLogin
+        userLogin,
+        authOperations
     }
 });

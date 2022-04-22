@@ -25700,6 +25700,224 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_6__.createRouter)({
 
 /***/ }),
 
+/***/ "./resources/js/store/module/authOperations/actions.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/store/module/authOperations/actions.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+/**
+ * Actions for CrudOperations
+ */
+
+var actions = {
+  /**
+   * 
+   * Store action that removes a project
+   * 
+   * @param {Integer} entryID 
+   */
+  removeProject: function removeProject(_ref, entryID) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              commit = _ref.commit;
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("/api/admin/projects/" + entryID).then(function () {
+                commit('DELETE_PROJECT', entryID);
+              })["catch"](function (error) {
+                console.log(error);
+              });
+
+            case 3:
+              return _context.abrupt("return", _context.sent);
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+
+  /**
+   * 
+   * RetrieveProjects retrieve projects
+   * 
+   * @returns 
+   */
+  retrieveProjects: function retrieveProjects(_ref2, page) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              commit = _ref2.commit;
+              _context2.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/sanctum/csrf-cookie").then(function () {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/admin/projects?page=" + page).then(function (response) {
+                  commit('SET_PROJECTS', response.data.data.data);
+                  commit('SET_PAGINATION', {
+                    current_page: response.data.data.pagination.current_page,
+                    first_page_url: response.data.data.pagination.first_page_url,
+                    prev_page_url: response.data.data.pagination.prev_page_url,
+                    next_page_url: response.data.data.pagination.next_page_url,
+                    last_page_url: response.data.data.pagination.last_page_url,
+                    last_page: response.data.data.pagination.last_page,
+                    per_page: response.data.data.pagination.per_page,
+                    total: response.data.data.pagination.total,
+                    path: response.data.data.pagination.path
+                  });
+                })["catch"](function (e) {
+                  console.log(e);
+                });
+              });
+
+            case 3:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (actions);
+
+/***/ }),
+
+/***/ "./resources/js/store/module/authOperations/getters.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/store/module/authOperations/getters.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
+ * getters from crud Operations
+ */
+var getters = {
+  auth_Projects: function auth_Projects(state) {
+    return state.auth_Projects;
+  },
+  auth_Pagination: function auth_Pagination(state) {
+    return state.auth_Pagination;
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getters);
+
+/***/ }),
+
+/***/ "./resources/js/store/module/authOperations/index.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/store/module/authOperations/index.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions */ "./resources/js/store/module/authOperations/actions.js");
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mutations */ "./resources/js/store/module/authOperations/mutations.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./state */ "./resources/js/store/module/authOperations/state.js");
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getters */ "./resources/js/store/module/authOperations/getters.js");
+/**
+ * CrudOperations module
+ */
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  actions: _actions__WEBPACK_IMPORTED_MODULE_0__["default"],
+  mutations: _mutations__WEBPACK_IMPORTED_MODULE_1__["default"],
+  state: _state__WEBPACK_IMPORTED_MODULE_2__["default"],
+  getters: _getters__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/module/authOperations/mutations.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/store/module/authOperations/mutations.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
+ * Mutation for CrudOperations
+ */
+var mutations = {
+  DELETE_PROJECT: function DELETE_PROJECT(state, id) {
+    var index = 0;
+    index = state.auth_Projects.findIndex(function (project) {
+      return project.id == id;
+    });
+    state.auth_Projects.splice(index, 1);
+  },
+  SET_PROJECTS: function SET_PROJECTS(state, projects) {
+    state.auth_Projects = projects;
+  },
+  SET_PAGINATION: function SET_PAGINATION(state, pagination) {
+    state.auth_Pagination = pagination;
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mutations);
+
+/***/ }),
+
+/***/ "./resources/js/store/module/authOperations/state.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/store/module/authOperations/state.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
+ * state for crudOperations
+ */
+var state = {
+  auth_Projects: [],
+  auth_Pagination: {}
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (state);
+
+/***/ }),
+
 /***/ "./resources/js/store/module/portfolio/actions.js":
 /*!********************************************************!*\
   !*** ./resources/js/store/module/portfolio/actions.js ***!
@@ -26228,11 +26446,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "store": () => (/* binding */ store)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _module_portfolio_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./module/portfolio/index */ "./resources/js/store/module/portfolio/index.js");
 /* harmony import */ var _module_usersRegistration_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./module/usersRegistration/index */ "./resources/js/store/module/usersRegistration/index.js");
 /* harmony import */ var _module_userLogin_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./module/userLogin/index */ "./resources/js/store/module/userLogin/index.js");
-/* harmony import */ var vuex_persistedstate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex-persistedstate */ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js");
+/* harmony import */ var _module_authOperations_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./module/authOperations/index */ "./resources/js/store/module/authOperations/index.js");
+/* harmony import */ var vuex_persistedstate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex-persistedstate */ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js");
+
 
 
 
@@ -26242,12 +26462,13 @@ __webpack_require__.r(__webpack_exports__);
  * Vuex Store
  */
 
-var store = (0,vuex__WEBPACK_IMPORTED_MODULE_4__.createStore)({
-  plugins: [(0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_3__["default"])()],
+var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.createStore)({
+  plugins: [(0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_4__["default"])()],
   modules: {
     portfolio: _module_portfolio_index__WEBPACK_IMPORTED_MODULE_0__["default"],
     usersRegistration: _module_usersRegistration_index__WEBPACK_IMPORTED_MODULE_1__["default"],
-    userLogin: _module_userLogin_index__WEBPACK_IMPORTED_MODULE_2__["default"]
+    userLogin: _module_userLogin_index__WEBPACK_IMPORTED_MODULE_2__["default"],
+    authOperations: _module_authOperations_index__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 });
 

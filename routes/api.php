@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\guest\ProjectGuestController;
 use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\Api\admin\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +19,11 @@ use App\Http\Controllers\API\RegisterController;
 Route::controller(RegisterController::class)->group(function(){
     Route::post('register', 'register');
     Route::post('login', 'login');
+});
+
+//admin routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('admin/projects', ProjectController::class)->middleware('XSS');
 });
 
 //guest routes
