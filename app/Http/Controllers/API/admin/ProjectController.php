@@ -13,20 +13,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ProjectController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        try {
-            return $this->sendResponse(new ProjectCollection(Project::paginate()), 200);
-        } catch (\Exception $e) {
-            throw new HttpException(500, $e->getMessage());
-        }
-    }
-
+   
     /**
      * Store a newly created resource in storage.
      *

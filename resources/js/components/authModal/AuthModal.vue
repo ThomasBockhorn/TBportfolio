@@ -87,9 +87,9 @@ export default {
      * @return void
      */
     async fetchData(page) {
-      await this.$store.dispatch("retrieveProjects", page);
-      this.projects = this.$store.getters.auth_Projects;
-      this.totalPages = this.$store.getters.auth_Pagination.last_page;
+      await this.$store.dispatch("getProjects", page);
+      this.projects = this.$store.getters.projects;
+      this.totalPages = this.$store.getters.pagination.last_page;
     },
 
     /**

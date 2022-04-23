@@ -23180,11 +23180,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this.$store.dispatch("retrieveProjects", page);
+                return _this.$store.dispatch("getProjects", page);
 
               case 2:
-                _this.projects = _this.$store.getters.auth_Projects;
-                _this.totalPages = _this.$store.getters.auth_Pagination.last_page;
+                _this.projects = _this.$store.getters.projects;
+                _this.totalPages = _this.$store.getters.pagination.last_page;
 
               case 4:
               case "end":
