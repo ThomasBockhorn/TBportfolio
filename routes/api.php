@@ -23,7 +23,7 @@ Route::controller(RegisterController::class)->group(function(){
 
 //admin routes
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('admin/projects', ProjectController::class)->except('index')->middleware('XSS');
+    Route::apiResource('admin/projects', ProjectController::class)->except('index', 'show')->middleware('XSS');
 });
 
 //guest routes

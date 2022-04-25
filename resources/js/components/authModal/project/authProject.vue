@@ -11,7 +11,7 @@
           <button class="btn btn-outline-primary m-1">Edit</button>
           <button
             class="btn btn-outline-danger m-1"
-            @click="remove(project.id)"
+            @click.prevent="remove(project.id)"
           >
             Delete
           </button>
@@ -25,8 +25,9 @@
 export default {
   props: ["project"],
   methods: {
-    remove(project) {
-      this.$emit('clicked', project);
+    remove(projectID) {
+      this.$emit("deleted", projectID);
+      this.$store.dispatch("removeProject", projectID);
     },
   },
 };

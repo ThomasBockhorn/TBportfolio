@@ -16,7 +16,7 @@
           <div class="modal-body text-center">
             <div class="list-group">
               <div v-for="project in projects" :key="project.id">
-                <AuthProject :project="project" @clicked="deleteProject"></AuthProject>
+                <AuthProject :project="project" @deleted="deleted"></AuthProject>
               </div>
             </div>
           </div>
@@ -92,17 +92,12 @@ export default {
       this.totalPages = this.$store.getters.pagination.last_page;
     },
 
-    /**
-     * Deletes a project
-     *
-     * @param {Integer} id 
-     * @return void
-     */
-    deleteProject(id){
-      this.$store.dispatch("removeProject", id);
-      this.projects = this.$store.getters.auth_Projects;
-      this.totalPages = this.$store.getters.auth_Pagination.last_page;
+    deleted(id){
+      let index = this.projects.map(item => item.id).indexOf(id);  //This gets the index of project
+      this.projects.splice(index, 1);
     }
+
+
   },
 };
 </script>

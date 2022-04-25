@@ -12,9 +12,10 @@ const actions = {
      * @param {Integer} entryID 
      */
     async removeProject({ commit }, entryID) {
-        return await axios.delete("/api/admin/projects/" + entryID)
-            .then(() => {
-                commit('DELETE_PROJECT', entryID);
+        await axios.get('/sanctum/csrf-cookie');
+        return await axios.delete(`/api/admin/projects/${entryID}`, { withCredentials: true })
+            .then((response) => {
+                return "successful";
             })
             .catch(error => {
                 console.log(error);
@@ -22,34 +23,6 @@ const actions = {
     },
 
 
-    /**
-     * 
-     * RetrieveProjects retrieve projects
-     * 
-     * @returns 
-     */
-    async retrieveProjects({ commit }, page) {
-        await axios.get("/sanctum/csrf-cookie").then(() => {
-            return axios.get("/api/admin/projects?page=" + page)
-                .then(response => {
-                    commit('SET_PROJECTS', response.data.data.data);
-                    commit('SET_PAGINATION', {
-                        current_page: response.data.data.pagination.current_page,
-                        first_page_url: response.data.data.pagination.first_page_url,
-                        prev_page_url: response.data.data.pagination.prev_page_url,
-                        next_page_url: response.data.data.pagination.next_page_url,
-                        last_page_url: response.data.data.pagination.last_page_url,
-                        last_page: response.data.data.pagination.last_page,
-                        per_page: response.data.data.pagination.per_page,
-                        total: response.data.data.pagination.total,
-                        path: response.data.data.pagination.path
-                    });
-                })
-                .catch((e) => {
-                    console.log(e);
-                });
-        })
 
-    }
 }
 export default actions;

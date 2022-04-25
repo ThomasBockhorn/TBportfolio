@@ -23194,17 +23194,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
+    deleted: function deleted(id) {
+      var index = this.projects.map(function (item) {
+        return item.id;
+      }).indexOf(id); //This gets the index of project
 
-    /**
-     * Deletes a project
-     *
-     * @param {Integer} id 
-     * @return void
-     */
-    deleteProject: function deleteProject(id) {
-      this.$store.dispatch("removeProject", id);
-      this.projects = this.$store.getters.auth_Projects;
-      this.totalPages = this.$store.getters.auth_Pagination.last_page;
+      this.projects.splice(index, 1);
     }
   }
 });
@@ -23225,8 +23220,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["project"],
   methods: {
-    remove: function remove(project) {
-      this.$emit('clicked', project);
+    remove: function remove(projectID) {
+      this.$emit("deleted", projectID);
+      this.$store.dispatch("removeProject", projectID);
     }
   }
 });
@@ -24235,10 +24231,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: project.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AuthProject, {
       project: project,
-      onClicked: $options.deleteProject
+      onDeleted: $options.deleted
     }, null, 8
     /* PROPS */
-    , ["project", "onClicked"])]);
+    , ["project", "onDeleted"])]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.totalPages, function (page) {
@@ -24311,9 +24307,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-outline-danger m-1",
-    onClick: _cache[0] || (_cache[0] = function ($event) {
+    onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return $options.remove($props.project.id);
-    })
+    }, ["prevent"]))
   }, " Delete ")])])])]);
 }
 
@@ -25606,7 +25602,8 @@ try {
 
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+window.axios.defaults.withCredentials = true;
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -25741,64 +25738,27 @@ var actions = {
             case 0:
               commit = _ref.commit;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("/api/admin/projects/" + entryID).then(function () {
-                commit('DELETE_PROJECT', entryID);
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/sanctum/csrf-cookie');
+
+            case 3:
+              _context.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("/api/admin/projects/".concat(entryID), {
+                withCredentials: true
+              }).then(function (response) {
+                return "successful";
               })["catch"](function (error) {
                 console.log(error);
               });
 
-            case 3:
+            case 5:
               return _context.abrupt("return", _context.sent);
 
-            case 4:
+            case 6:
             case "end":
               return _context.stop();
           }
         }
       }, _callee);
-    }))();
-  },
-
-  /**
-   * 
-   * RetrieveProjects retrieve projects
-   * 
-   * @returns 
-   */
-  retrieveProjects: function retrieveProjects(_ref2, page) {
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      var commit;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              commit = _ref2.commit;
-              _context2.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/sanctum/csrf-cookie").then(function () {
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/admin/projects?page=" + page).then(function (response) {
-                  commit('SET_PROJECTS', response.data.data.data);
-                  commit('SET_PAGINATION', {
-                    current_page: response.data.data.pagination.current_page,
-                    first_page_url: response.data.data.pagination.first_page_url,
-                    prev_page_url: response.data.data.pagination.prev_page_url,
-                    next_page_url: response.data.data.pagination.next_page_url,
-                    last_page_url: response.data.data.pagination.last_page_url,
-                    last_page: response.data.data.pagination.last_page,
-                    per_page: response.data.data.pagination.per_page,
-                    total: response.data.data.pagination.total,
-                    path: response.data.data.pagination.path
-                  });
-                })["catch"](function (e) {
-                  console.log(e);
-                });
-              });
-
-            case 3:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
     }))();
   }
 };
@@ -25820,14 +25780,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * getters from crud Operations
  */
-var getters = {
-  auth_Projects: function auth_Projects(state) {
-    return state.auth_Projects;
-  },
-  auth_Pagination: function auth_Pagination(state) {
-    return state.auth_Pagination;
-  }
-};
+var getters = {};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getters);
 
 /***/ }),
@@ -25877,21 +25830,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Mutation for CrudOperations
  */
-var mutations = {
-  DELETE_PROJECT: function DELETE_PROJECT(state, id) {
-    var index = 0;
-    index = state.auth_Projects.findIndex(function (project) {
-      return project.id == id;
-    });
-    state.auth_Projects.splice(index, 1);
-  },
-  SET_PROJECTS: function SET_PROJECTS(state, projects) {
-    state.auth_Projects = projects;
-  },
-  SET_PAGINATION: function SET_PAGINATION(state, pagination) {
-    state.auth_Pagination = pagination;
-  }
-};
+var mutations = {};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mutations);
 
 /***/ }),
@@ -25910,10 +25849,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * state for crudOperations
  */
-var state = {
-  auth_Projects: [],
-  auth_Pagination: {}
-};
+var state = {};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (state);
 
 /***/ }),
