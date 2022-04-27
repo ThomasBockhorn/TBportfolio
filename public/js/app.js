@@ -23171,6 +23171,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     totalPages: 'totalPages'
   })),
   methods: {
+    /**
+     * Close will close the modal by sending the close info back to parent
+     *
+     * @return void
+     */
     close: function close() {
       this.$emit("close");
     },
@@ -23200,6 +23205,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee);
       }))();
     },
+
+    /**
+     * This will find the index of the project id and delete it from the projects array 
+     *
+     * @param {Integer} id 
+     * @return void
+     */
     deleted: function deleted(id) {
       var index = this.projects.map(function (item) {
         return item.id;
@@ -23226,6 +23238,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["project"],
   methods: {
+    /**
+     * This method will call the store method, removeProject, and emit a the projectID to the parent which will
+     * delete the local Projects array
+     *
+     * @param {any} projectID 
+     * @return void
+     */
     remove: function remove(projectID) {
       this.$emit("deleted", projectID);
       this.$store.dispatch("removeProject", projectID);

@@ -25,6 +25,14 @@
 export default {
   props: ["project"],
   methods: {
+
+    /**
+     * This method will call the store method, removeProject, and emit a the projectID to the parent which will
+     * delete the local Projects array
+     *
+     * @param {any} projectID 
+     * @return void
+     */
     remove(projectID) {
       this.$emit("deleted", projectID);
       this.$store.dispatch("removeProject", projectID);
@@ -32,6 +40,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

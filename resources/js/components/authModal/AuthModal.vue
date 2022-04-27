@@ -81,6 +81,11 @@ export default {
   },
   methods: {
     
+    /**
+     * Close will close the modal by sending the close info back to parent
+     *
+     * @return void
+     */
     close() {
       this.$emit("close");
     },
@@ -95,6 +100,12 @@ export default {
       await this.$store.dispatch("getProjects", page);
     },
 
+    /**
+     * This will find the index of the project id and delete it from the projects array 
+     *
+     * @param {Integer} id 
+     * @return void
+     */
     deleted(id){
       let index = this.projects.map(item => item.id).indexOf(id);  //This gets the index of project
       this.projects.splice(index, 1);
