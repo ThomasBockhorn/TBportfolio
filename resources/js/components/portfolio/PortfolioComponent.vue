@@ -48,6 +48,13 @@ export default {
     })
   },
   methods: {
+
+    /**
+     * The fetchData method will get the projects by calling the store
+     *
+     * @param {Integer} page 
+     * @return void
+     */
     async fetchData(page) {
       await this.$store.dispatch("getProjects", page);
     },
@@ -56,7 +63,9 @@ export default {
 </script>
 
 <style scoped>
+
 .container-fluid {
   height: 100%;
 }
+
 </style>
