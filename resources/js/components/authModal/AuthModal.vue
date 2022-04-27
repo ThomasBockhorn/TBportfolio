@@ -58,14 +58,13 @@
  */
 
 import AuthProject from "./project/authProject.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "AuthModal",
   data() {
     return {
       tab: 1,
-      totalPages: 0,
-      projects: [],
     };
   },
   components: {
@@ -73,6 +72,12 @@ export default {
   },
   mounted() {
     this.fetchData(1);
+  },
+  computed: {
+    ...mapGetters({
+      projects: 'projects',
+      totalPages: 'totalPages'
+    })
   },
   methods: {
     
@@ -88,8 +93,6 @@ export default {
      */
     async fetchData(page) {
       await this.$store.dispatch("getProjects", page);
-      this.projects = this.$store.getters.projects;
-      this.totalPages = this.$store.getters.pagination.last_page;
     },
 
     deleted(id){
