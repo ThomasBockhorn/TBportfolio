@@ -25889,7 +25889,7 @@ var actions = {
             case 0:
               commit = _ref.commit;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://127.0.0.1:8000/api/guest/projects?page=" + page).then(function (response) {
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://localhost:8000/api/guest/projects?page=" + page).then(function (response) {
                 commit('SET_PROJECTS', response.data.data.data);
                 commit('SET_PAGINATION', {
                   current_page: response.data.data.pagination.current_page,
@@ -26071,8 +26071,8 @@ var actions = {
             case 0:
               commit = _ref.commit;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/sanctum/csrf-cookie").then(function () {
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/login", {
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://localhost:8000/sanctum/csrf-cookie").then(function () {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("http://localhost:8000/api/login", {
                   email: userInfo.email,
                   password: userInfo.password
                 }).then(function (response) {
@@ -26255,7 +26255,7 @@ var actions = {
             case 0:
               commit = _ref.commit;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default().post("http://127.0.0.1:8000/api/register", {
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().post("http://localhost:8000/api/register", {
                 name: userInput.name,
                 email: userInput.email,
                 password: userInput.password,

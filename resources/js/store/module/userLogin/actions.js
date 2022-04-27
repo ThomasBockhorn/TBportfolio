@@ -6,9 +6,9 @@ import axios from 'axios';
 
 const actions = {
     async login({ commit }, userInfo) {
-        await axios.get("/sanctum/csrf-cookie").then(() => {
+        await axios.get("http://localhost:8000/sanctum/csrf-cookie").then(() => {
                 return axios
-                    .post("/api/login", {
+                    .post("http://localhost:8000/api/login", {
                         email: userInfo.email,
                         password: userInfo.password,
                     })

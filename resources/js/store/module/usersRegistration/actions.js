@@ -12,7 +12,7 @@ const actions = {
      */
     async submitRegistration({ commit }, userInput) {
         await axios
-            .post("http://127.0.0.1:8000/api/register", {
+            .post("http://localhost:8000/api/register", {
                 name: userInput.name,
                 email: userInput.email,
                 password: userInput.password,

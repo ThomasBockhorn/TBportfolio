@@ -6,7 +6,7 @@ import axios from 'axios'
 
 const actions = {
     async getProjects({ commit }, page) {
-        return await axios.get("http://127.0.0.1:8000/api/guest/projects?page=" + page)
+        return await axios.get("http://localhost:8000/api/guest/projects?page=" + page)
             .then(response => {
                 commit('SET_PROJECTS', response.data.data.data);
                 commit('SET_PAGINATION', {
