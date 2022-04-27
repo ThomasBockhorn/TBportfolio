@@ -20,6 +20,7 @@ const actions = {
                     total: response.data.data.pagination.total,
                     path: response.data.data.pagination.path
                 });
+                commit('SET_TOTALPAGES', response.data.data.pagination.last_page);
             })
             .catch((e) => {
                 console.log(e);

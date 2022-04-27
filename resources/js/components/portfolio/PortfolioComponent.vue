@@ -21,6 +21,7 @@
 import Project from "../projects/Project.vue";
 import PaginationComponent from "../pagination/PaginationComponent.vue";
 import ProjectNav from "../projectNav/ProjectNav.vue";
+import { mapGetters } from "vuex";
 
 /**
  * PortfolioComponent is where all the projects are displayed.
@@ -30,9 +31,6 @@ export default {
   data() {
     return {
       location: "portfolio",
-      projects: [],
-      pagination: {},
-      totalPages: 0
     };
   },
   components: {
@@ -44,15 +42,14 @@ export default {
     this.fetchData(1);
   },
   computed: {
-    findLastPage() {
-      return this.totalPages;
-    },
+    ...mapGetters({
+      projects: 'projects',
+      totalPages: 'totalPages'
+    })
   },
   methods: {
     async fetchData(page) {
       await this.$store.dispatch("getProjects", page);
-      this.projects = this.$store.getters.projects;
-      this.totalPages = this.$store.getters.pagination.last_page;
     },
   },
 };

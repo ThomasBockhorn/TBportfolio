@@ -23763,11 +23763,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _projects_Project_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../projects/Project.vue */ "./resources/js/components/projects/Project.vue");
 /* harmony import */ var _pagination_PaginationComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pagination/PaginationComponent.vue */ "./resources/js/components/pagination/PaginationComponent.vue");
 /* harmony import */ var _projectNav_ProjectNav_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../projectNav/ProjectNav.vue */ "./resources/js/components/projectNav/ProjectNav.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -23780,10 +23788,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: "PortfolioComponent",
   data: function data() {
     return {
-      location: "portfolio",
-      projects: [],
-      pagination: {},
-      totalPages: 0
+      location: "portfolio"
     };
   },
   components: {
@@ -23794,11 +23799,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     this.fetchData(1);
   },
-  computed: {
-    findLastPage: function findLastPage() {
-      return this.totalPages;
-    }
-  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)({
+    projects: 'projects',
+    totalPages: 'totalPages'
+  })),
   methods: {
     fetchData: function fetchData(page) {
       var _this = this;
@@ -23812,10 +23816,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this.$store.dispatch("getProjects", page);
 
               case 2:
-                _this.projects = _this.$store.getters.projects;
-                _this.totalPages = _this.$store.getters.pagination.last_page;
-
-              case 4:
               case "end":
                 return _context.stop();
             }
@@ -25224,7 +25224,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_PaginationComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PaginationComponent");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ProjectNav), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.projects, function (project) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ProjectNav), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.projects, function (project) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: project.id,
       "class": "m-2"
@@ -25236,7 +25236,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), 128
   /* KEYED_FRAGMENT */
   ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PaginationComponent, {
-    totalPages: $data.totalPages,
+    totalPages: _ctx.totalPages,
     onClicked: $options.fetchData
   }, null, 8
   /* PROPS */
@@ -25902,6 +25902,7 @@ var actions = {
                   total: response.data.data.pagination.total,
                   path: response.data.data.pagination.path
                 });
+                commit('SET_TOTALPAGES', response.data.data.pagination.last_page);
               })["catch"](function (e) {
                 console.log(e);
               });
@@ -25942,6 +25943,9 @@ var getters = {
   },
   pagination: function pagination(state) {
     return state.pagination;
+  },
+  totalPages: function totalPages(state) {
+    return state.totalPages;
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getters);
@@ -25997,6 +26001,9 @@ var mutations = {
   },
   SET_PAGINATION: function SET_PAGINATION(state, pagination) {
     state.pagination = pagination;
+  },
+  SET_TOTALPAGES: function SET_TOTALPAGES(state, totalPages) {
+    state.totalPages = totalPages;
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mutations);
@@ -26020,7 +26027,8 @@ __webpack_require__.r(__webpack_exports__);
 var state = {
   "return": {
     projects: [],
-    pagination: {}
+    pagination: {},
+    totalPages: 0
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (state);

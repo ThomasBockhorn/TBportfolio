@@ -4,7 +4,8 @@
 const state = {
     return: {
         projects: [],
-        pagination: {}
+        pagination: {},
+        totalPages: 0
     }
 };
 

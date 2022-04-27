@@ -7,6 +7,9 @@ const getters = {
     },
     pagination: state => {
         return state.pagination;
+    },
+    totalPages: state => {
+        return state.totalPages;
     }
 }
 
