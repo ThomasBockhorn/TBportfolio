@@ -4,7 +4,7 @@
       <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Add Project</h5>
+            <h5 class="modal-title">Project</h5>
             <button
               type="button"
               class="btn-close"
@@ -49,13 +49,6 @@
                   aria-describedby="inputGroupFileAddon04"
                   aria-label="Upload"
                 />
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  id="inputGroupFileAddon04"
-                >
-                  Add
-                </button>
               </div>
             </form>
           </div>

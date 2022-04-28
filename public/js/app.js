@@ -24251,7 +24251,7 @@ var _hoisted_5 = {
 var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
     "class": "modal-title"
-  }, "Add Project", -1
+  }, "Project", -1
   /* HOISTED */
   );
 });
@@ -24296,11 +24296,7 @@ var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
     id: "inputGroupFile04",
     "aria-describedby": "inputGroupFileAddon04",
     "aria-label": "Upload"
-  }), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-outline-secondary",
-    type: "button",
-    id: "inputGroupFileAddon04"
-  }, " Add ")])])], -1
+  })])])], -1
   /* HOISTED */
   );
 });
