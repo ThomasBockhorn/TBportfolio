@@ -16,15 +16,24 @@
           <div class="modal-body text-center">
             <div class="list-group">
               <div v-for="project in projects" :key="project.id">
-                <AuthProject :project="project" @deleted="deleted"></AuthProject>
+                <AuthProject
+                  :project="project"
+                  @deleted="deleted"
+                ></AuthProject>
               </div>
             </div>
           </div>
           <div class="modal-footer">
             <div>
-              <button class="btn-outline-secondary btn mb-3">
+              <button class="btn-outline-secondary btn mb-3" @click="showModal">
                 Add A Project
               </button>
+              <transition name="modal-fade">
+                <auth-add-edit-modal
+                  v-if="isModalVisible"
+                  @close="closeModal"
+                />
+              </transition>
             </div>
             <nav aria-label="crud navigation">
               <ul class="pagination pagination-sm">
@@ -59,28 +68,30 @@
 
 import AuthProject from "./project/authProject.vue";
 import { mapGetters } from "vuex";
+import AuthAddEditModal from "./AuthAddEditModal.vue";
 
 export default {
   name: "AuthModal",
   data() {
     return {
       tab: 1,
+      isModalVisible: false,
     };
   },
   components: {
     AuthProject,
+    AuthAddEditModal,
   },
   mounted() {
     this.fetchData(1);
   },
   computed: {
     ...mapGetters({
-      projects: 'projects',
-      totalPages: 'totalPages'
-    })
+      projects: "projects",
+      totalPages: "totalPages",
+    }),
   },
   methods: {
-    
     /**
      * Close will close the modal by sending the close info back to parent
      *
@@ -93,7 +104,7 @@ export default {
     /**
      * fetchData will fetch the data and populate it
      *
-     * @param {Integer} page 
+     * @param {Integer} page
      * @return void
      */
     async fetchData(page) {
@@ -101,17 +112,22 @@ export default {
     },
 
     /**
-     * This will find the index of the project id and delete it from the projects array 
+     * This will find the index of the project id and delete it from the projects array
      *
-     * @param {Integer} id 
+     * @param {Integer} id
      * @return void
      */
-    deleted(id){
-      let index = this.projects.map(item => item.id).indexOf(id);  //This gets the index of project
+    deleted(id) {
+      let index = this.projects.map((item) => item.id).indexOf(id); //This gets the index of project
       this.projects.splice(index, 1);
-    }
+    },
 
-
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
   },
 };
 </script>
