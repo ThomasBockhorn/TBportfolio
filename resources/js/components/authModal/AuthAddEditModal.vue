@@ -13,7 +13,52 @@
               @click="close"
             ></button>
           </div>
-          <div class="modal-body text-center"></div>
+          <div class="modal-body text-center">
+            <form action="" method="post">
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingProjectName"
+                  placeholder="Project Name"
+                />
+                <label for="floatingProjectName">Project Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <textarea
+                  class="form-control"
+                  placeholder="Leave a Description here"
+                  id="floatingDescription"
+                ></textarea>
+                <label for="floatingDescription">Description</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingURL"
+                  placeholder="Project URL"
+                />
+                <label for="floatingURL">Project URL</label>
+              </div>
+              <div class="input-group">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="inputGroupFile04"
+                  aria-describedby="inputGroupFileAddon04"
+                  aria-label="Upload"
+                />
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="inputGroupFileAddon04"
+                >
+                  Add
+                </button>
+              </div>
+            </form>
+          </div>
           <div class="modal-footer">
             <div>
               <button class="btn-outline-secondary btn mb-3">Submit</button>
