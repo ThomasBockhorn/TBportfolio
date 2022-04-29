@@ -15,13 +15,8 @@ class Project extends Model
     protected $fillable = [
         'title',
         'description',
-        'tags',
         'url',
         'image'
-    ];
-
-    protected $casts = [
-        'tags' => 'array'
     ];
 
     /**

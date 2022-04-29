@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->json('tags');
             $table->string('url');
             $table->string('image');
             $table->timestamps();
